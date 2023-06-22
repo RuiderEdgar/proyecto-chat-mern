@@ -1,0 +1,41 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS", //para definir que nuestro compilado luego pasará a js
+		"lib": ["DOM", "ES2015"], //match con el target
+		"esModuleInterop": true, //para asegurarnos de darle soporte a nuestro js de acuerdo al ts compilado
+		"resolveJsonModule": true, //nos permite interpretar imporaciones de archivo ,json
+		"moduleResolution": "node", // permite verificar la inclusion de ts de forma explicita en node
+		"target": "ES2015", //definir la estandarizacion del eCma, 2020
+		"noUnusedLocals": false, //establece para tu compilacion sin aviso de variables no usadas
+		"noUnusedParameters": false,
+		"forceConsistentCasingInFileNames": false, //fuerza de mayus y minus
+		"allowSyntheticDefaultImports": true, //soporte de exportaciones sin nombre, para cuando se importen no haya problema al darle alias
+		"noImplicitAny": true, //permite que no me de recomendaciones de tipo any
+		"sourceMap": true, //habilitar un archivo fuente de js donde va a caer todo el codigo final
+		"experimentalDecorators": true, //permite darle soporte a decoradores @Service @Component
+		"emitDecoratorMetadata": true, //permite que la definicion de los decoradores persista en tiempo de ejecucion
+		"pretty": true, //establece una compilaacion limpia y legible
+		"strict": true, //habilitar estandarizaciones del ecma para sugerencias
+		"baseUrl": "./", //definir el path para la carpeta de dist con el codigo final
+		"outDir": "./build", //dist, cache // ter permite darle el nombre a la carpeta de dist
+		"plugins": [
+			//establece plugins para la transformacion de alias paths
+			{ "transform": "typescript-transform-paths" }, //conexion con el transform path
+			{ "transform": "typescript-transform-paths", "afterDeclarations": true } //persista el transform
+		],
+		"paths": {
+			"@bootstrap/*": ["src/bootstrap/*"],
+			"@configs/*": ["src/configs/*"],
+			"@auth/*": ["src/features/auth/*"],
+			"@user/*": ["src/features/user/*"],
+			"@interfaces/*": ["src/interfaces/*"],
+			"@decorators/*": ["src/shared/globals/decorators/*"],
+			"@helpers/*": ["src/shared/globals/helpers/*"],
+			"@services/*": ["src/shared/globals/services/*"],
+			"@workers/*": ["src/shared/globals/workers/*"],
+			"@root/*": ["src/*"]
+		}
+	},
+	"exclude": ["node_modules"], //el ignore para la compilacion
+	"include": ["src/**/*.ts"] //el include para la compilacion
+}
